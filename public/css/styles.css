@@ -1,0 +1,165 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    height: auto;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+button{
+    cursor: pointer;
+}
+
+table{
+    margin-inline: 2rem;
+}
+
+.results{
+    height: 100vh;
+    width: 100%;
+    background-color: rgb(227, 238, 248);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.right-side{
+    position: relative;
+    height: 80vh;
+    width: 35vw;
+}
+
+.matchday-column{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 80vh;
+    width: 35vw;
+}
+
+.match{
+    /* position: absolute;
+    top: 0;
+    left: 0; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border: 1px solid red; */
+}
+
+.heading-matchday{
+    /* position: absolute;
+    top: 0;
+    left: 0; */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 10%;
+    width: 100%;
+    /* border: 1px solid blue; */
+}
+
+
+
+
+.home, .away{
+    height: 50px;
+    width: 50px;
+    margin: 10px;
+}
+
+
+
+.logout-form{
+    position: absolute;
+    right: 5%;
+    top: 4rem;
+    height: auto;
+    width: auto;
+}
+
+.log-out{
+    border-radius: .5rem;
+    /* height: 2rem;
+    width: auto; */
+    background-color: rgb(221, 29, 29);
+    color: white;
+    text-transform: uppercase;
+    border: none;
+    padding: 1rem 1.5rem;
+    text-align: center;
+    cursor: pointer;
+}
+
+/* Sign-in/up page */
+
+.container{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(197, 223, 245);
+}
+
+.container>h1{
+    margin: 2rem;
+}
+
+.sign-in,.sign-up{
+    padding: 1rem 2.5rem;
+    background-color: rgb(61, 61, 204);
+    margin: 1rem;
+    border-radius: .5rem;
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+/* sign-in-page*//* register-page */
+
+.sign-in-page, .register{
+    display: grid;
+    margin: 2rem;
+    border-radius: .5rem;
+    background-color: rgb(61, 61, 204);
+    padding: 1rem;
+    height: auto;
+}
+
+.sign-in-page>form, .register>form{
+    display: grid;
+    width: 20%;
+    height: auto;
+}
+
+.sign-in-page>form>input, .register>form>input{
+    height: 2rem;
+    outline: none;
+    border-radius: .5rem;
+    border: none;
+    margin: 1rem 0;
+    padding: .5rem;
+}
+
+.sign-in-page>form>button, .register>form>button{
+    width: 4rem;
+    height: 2rem;
+    border-radius: .5rem;
+    border: none;
+    background-color: lightblue;
+    cursor: pointer;
+}
+
+
+
+
+
