@@ -22,26 +22,38 @@
         </tr>
     <% }) %>
     </table>
-    <div class="right-side">
+    <div class="right-side" data-currentMatchday=<%= currentMatchday %>>
     <% mainArray.forEach( (matchday, index) => { %>
         
-        <div class="matchday-column" 
-        <% if( index  === currentMatchday()){ %>
-            style="opacity: 1;"
-        <% } else{ %>
-            style="opacity: 0;display: none"
-        <% } %>
-        data-matchday=<%= index %>>
+        <div class="matchday-column">
             <div class="heading-matchday">
                 <button class="left-toggle" > < </button>
                 <h1>Matchday <%= index %></h1>
                 <button class="right-toggle"> > </button>
             </div>
             <% matchday.forEach((element) => { %>
-                <div class="match">
+                <div class="match" data-matchId=<%= element.id %>>
                         <img src= <%= element.homeTeam.crest %>  alt="" class="home">
-                        <span> <%= element.score.fullTime.home %> - <%= element.score.fullTime.away %> </span>
+                        <span class="final-score"> <%= element.score.fullTime.home %> - <%= element.score.fullTime.away %> </span>
                         <img src= <%= element.awayTeam.crest %>  alt="" class="away">
+
+                        <% foundUser.forEach( (match) => { %>
+                            <% if(element.id === match.matchId){ %>
+                            <button class="predict-btn" style="display: none;">Predict</button>
+                            <form method="post" action="/home" class="prediction" style="display: none;">
+                             <input type="number" name="home-score" class="home-score" min="0" max="12" required> - <input required type="number" name="home-score" class="away-score" min="0" max="12" >
+                             <button class="submit-prediction" data-matchId=<%= element.id %>>submit</button>
+                            </form>
+                            <div class="predicted-result"> Your prediction: <%= match.homeScore %> - <%= match.awayScore %> </div>
+                            <% }else if(element.id !== match.matchId){ %>
+                                <button class="predict-btn">Predict</button>
+                                <form method="post" action="/home" class="prediction">
+                                    <input type="number" name="home-score" class="home-score" min="0" max="12" required> - <input required type="number" name="home-score" class="away-score" min="0" max="12" >
+                                    <button class="submit-prediction" data-matchId=<%= element.id %>>submit</button>
+                                </form>
+                                <div class="predicted-result"></div>
+                            <% } %>
+                        <% }) %>
                    </div>
                  <% }) %>
         </div>
@@ -51,20 +63,12 @@
    
 </div>
 
-<form action="/home" method="post" class="logout-form">
+<form action="/logout" method="post" class="logout-form">
     <button type="submit" class="log-out">Log Out</button>
 </form>
 
-<script type="application/javascript">
-    let currentMatchday = "<%= state %>";
-    let anotherFunc = "<%= currentMatchday()%>";
-    let setState = "<%= setState() %>"
-    let leftBtn = document.querySelectorAll(".left-toggle")
-    leftBtn.forEach( (element) => {
-        element.addEventListener("click", () => {
-            console.log(currentMatchday);
-    })
-    })
-</script>
+<script src="/js/toggle.js" type="module"></script>
+<script src="/js/prediction.js" type="module"></script>
+<script src="../index.js" type="module"></script>
 
 <%- include('partials/footer') %>

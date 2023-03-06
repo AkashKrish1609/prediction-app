@@ -159,7 +159,10 @@ table{
     cursor: pointer;
 }
 
-
+.prediction>input{
+    width: 3rem;
+    padding: .5rem 0;
+}
 
 
 

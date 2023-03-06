@@ -13,6 +13,7 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({
     extended: true
   }));
+app.use(bodyParser.json());
 app.use(session({ 
     secret: 'my secret', 
     resave: false, 
@@ -32,12 +33,24 @@ userSchema.plugin(passportLocalMongoose);
 
 const User = new mongoose.model("User", userSchema);
 
+const matchesSchema = new mongoose.Schema({
+    userId: String,
+    matchId: Number,
+    homeScore: Number,  
+    awayScore: Number
+})
+
+const Match = new mongoose.model("Match", matchesSchema)
+
 passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+
+
 app.get("/home", (req, res) => {
     
+
 
 const options1 = axios.get('https://api.football-data.org/v4/competitions/2021/standings', {
     headers: {
@@ -55,7 +68,8 @@ Promise.all([options1, options2])
     let {standings} = response[0].data;
     let {table} = standings[0];
     let {matches} = response[1].data;
-    let currentMatchday = matches[0].season.currentMatchday;
+    let currentMatchday =  matches[0].season.currentMatchday;
+
 
     let filteredArray = [];
     for (let i = 0; i<39; i++){
@@ -82,19 +96,33 @@ Promise.all([options1, options2])
 
     // res.send(response[1].data)
     if(req.isAuthenticated()){
-        res.render('home', {
-            table: table, 
-            matches: matches, 
-            mainArray: filteredArray, 
-            currentMatchday: anotherFunc,
-            state: state.currentMatchday,
-            setState: setState
+        const userId = req.user.id;
+        Match.find({userId: userId}, function(err, foundUser) {
+            if(err){
+                res.render('home', {
+                    table: table, 
+                    matches: matches, 
+                    mainArray: filteredArray, 
+                    currentMatchday: currentMatchday
+                })
+            }else if(foundUser){
+                res.render('home', {
+                    table: table, 
+                    matches: matches, 
+                    mainArray: filteredArray, 
+                    currentMatchday: currentMatchday,
+                    foundUser: foundUser
+                })
+            }
+           
         })
+        
     }else{
         res.redirect("/signin")
     }
 
 }) 
+
 
 
 })
@@ -142,13 +170,38 @@ app.post("/signin", (req, res) => {
     
 })
 
-app.post("/home", (req, res) => {
+app.post("/logout", (req, res) => {
     req.logout(function(err) {
         if (err) { console.log(err); }
         res.redirect('/');
       });
 })
- 
+
+
+
+app.post("/home", (req, res) => {
+const { matchId, homeTeamScore, awayTeamScore } = req.body;
+const userId = req.user.id
+// console.log(matchId, homeTeamScore, awayTeamScore, req.user.id);
+
+const match = new Match({
+    userId: userId,
+    matchId: matchId,
+    homeScore: homeTeamScore,
+    awayScore: awayTeamScore
+})
+
+match.save()
+// User.findById(req.user.id, (err, foundUser) => {
+//     if (err) {
+//       console.log(err);
+//     return;
+//     }else if(foundUser){
+
+//     }
+// })
+
+})
 
 app.listen(3000, () => {
     console.log("Server up and running");
