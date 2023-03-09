@@ -6,6 +6,7 @@ let submitPredictions = document.querySelectorAll(".submit-prediction")
 let homeScore = document.querySelectorAll(".home-score")
 let awayScore = document.querySelectorAll(".away-score")
 let result = document.querySelectorAll(".predicted-result")
+let hyphon = document.querySelectorAll(".hyphon")
 
 
 predictionInputs.forEach( (element) => {
@@ -16,10 +17,14 @@ submitPredictions.forEach( (element) => {
 })
 
 for (let i = 0; i < matches.length; i++) {
-if( !isNaN(parseFloat(finalScore[i].innerText)) ){
-    predictBtns[i].style.display = "none"
-}else{
+if( isNaN(parseFloat(finalScore[i].innerText))){
     predictBtns[i].style.display = "block"
+}else if( !isNaN(parseFloat(finalScore[i].innerText))){
+    predictBtns[i].style.display = "none"
+}
+
+if (result[i].textContent.trim() !== ""){
+    predictBtns[i].style.display = "none"
 }
 
     predictBtns[i].addEventListener("click", () => {
@@ -34,9 +39,10 @@ if( !isNaN(parseFloat(finalScore[i].innerText)) ){
     let matchId = submitPredictions[i].getAttribute("data-matchId");
     let homeTeamScore = homeScore[i].value;
     let awayTeamScore = awayScore[i].value;
-    submitPredictions[i].style.display = "none"
-    homeScore[i].style.display = "none"
-    awayScore[i].style.display = "none"
+    submitPredictions[i].style.display = "none";
+    homeScore[i].style.display = "none";
+    awayScore[i].style.display = "none";
+    hyphon[i].innerText = " ";
     result[i].innerHTML = ` Your prediction: ${homeScore[i].value} - ${awayScore[i].value}`
 
 

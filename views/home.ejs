@@ -37,23 +37,19 @@
                         <span class="final-score"> <%= element.score.fullTime.home %> - <%= element.score.fullTime.away %> </span>
                         <img src= <%= element.awayTeam.crest %>  alt="" class="away">
 
-                        <% foundUser.forEach( (match) => { %>
-                            <% if(element.id === match.matchId){ %>
-                            <button class="predict-btn" style="display: none;">Predict</button>
-                            <form method="post" action="/home" class="prediction" style="display: none;">
-                             <input type="number" name="home-score" class="home-score" min="0" max="12" required> - <input required type="number" name="home-score" class="away-score" min="0" max="12" >
-                             <button class="submit-prediction" data-matchId=<%= element.id %>>submit</button>
+                            <button class="predict-btn">Predict</button>
+                            <form method="post" action="/home" class="prediction">
+                            <input type="number" name="home-score" class="home-score" min="0" max="12" required><span class="hyphon"> - </span><input required type="number" name="home-score" class="away-score" min="0" max="12" >
+                            <button class="submit-prediction" data-matchId=<%= element.id %>>submit</button>
                             </form>
-                            <div class="predicted-result"> Your prediction: <%= match.homeScore %> - <%= match.awayScore %> </div>
-                            <% }else if(element.id !== match.matchId){ %>
-                                <button class="predict-btn">Predict</button>
-                                <form method="post" action="/home" class="prediction">
-                                    <input type="number" name="home-score" class="home-score" min="0" max="12" required> - <input required type="number" name="home-score" class="away-score" min="0" max="12" >
-                                    <button class="submit-prediction" data-matchId=<%= element.id %>>submit</button>
-                                </form>
-                                <div class="predicted-result"></div>
-                            <% } %>
-                        <% }) %>
+                            <div class="predicted-result"> 
+                            <% foundUser.forEach( (match) => { %>
+                                <% if(element.id === match.matchId){ %>
+                                Your prediction: <%= match.homeScore %> - <%= match.awayScore %> 
+                                <% }else if(element.id !== match.matchId) {%>
+                                <% } %>
+                                <% }) %>
+                            </div>
                    </div>
                  <% }) %>
         </div>
@@ -66,6 +62,8 @@
 <form action="/logout" method="post" class="logout-form">
     <button type="submit" class="log-out">Log Out</button>
 </form>
+
+<!-- <div class="friends-list"></div> -->
 
 <script src="/js/toggle.js" type="module"></script>
 <script src="/js/prediction.js" type="module"></script>
