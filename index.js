@@ -134,7 +134,7 @@ app.get("/register", (req, res) => {
     res.render("register")
 })
 app.get("/signin", (req, res) => {
-    res.render("signin")
+    res.render("signIn")
 })
 
 app.post("/register", (req, res) => {
