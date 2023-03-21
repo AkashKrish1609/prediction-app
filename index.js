@@ -79,19 +79,16 @@ Promise.all([options1, options2])
     filteredArray.push(individualMatchday)
     }
 
-    //state management
-
-    let state = {
-        currentMatchday: currentMatchday
+    function ScoreAlgorithm (actualScore, predictedScore) {
+        let accuracyPercentage = Math.max(0, (1 - Math.abs(actualScore - predictedScore) / actualScore)) * 100;
+        return accuracyPercentage
     }
 
-    function anotherFunc(){
-        return state.currentMatchday
-    }
-
-    function setState(){
-        state.currentMatchday -= 1 
-        anotherFunc()
+    function totalScore(homeS, homeP, awayS, awayP){
+        let homeAverage = ScoreAlgorithm(homeS, homeP);
+        let awayAverage = ScoreAlgorithm(awayS, awayP);
+        let result;
+        return result = ((homeAverage + awayAverage)/2 ).toFixed(2)+ "%";
     }
 
     // res.send(response[1].data)
@@ -111,7 +108,8 @@ Promise.all([options1, options2])
                     matches: matches, 
                     mainArray: filteredArray, 
                     currentMatchday: currentMatchday,
-                    foundUser: foundUser
+                    foundUser: foundUser,
+                    totalScore: totalScore
                 })
             }
            

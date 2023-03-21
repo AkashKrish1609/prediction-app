@@ -66,6 +66,8 @@ if (result[i].textContent.trim() !== ""){
 
         }  
     })
+
+
     
 }
 

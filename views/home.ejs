@@ -1,5 +1,7 @@
 <%- include('partials/header') %>
-
+<form action="/logout" method="post" class="logout-form">
+    <button type="submit" class="log-out">Log Out</button>
+</form>
 
 <div class="results">
     <table>
@@ -42,12 +44,20 @@
                             <input type="number" name="home-score" class="home-score" min="0" max="12" required><span class="hyphon"> - </span><input required type="number" name="home-score" class="away-score" min="0" max="12" >
                             <button class="submit-prediction" data-matchId=<%= element.id %>>submit</button>
                             </form>
+                            
                             <div class="predicted-result"> 
-                            <% foundUser.forEach( (match) => { %>
+                                <% foundUser.forEach( (match) => { %>
                                 <% if(element.id === match.matchId){ %>
                                 Your prediction: <%= match.homeScore %> - <%= match.awayScore %> 
                                 <% }else if(element.id !== match.matchId) {%>
                                 <% } %>
+                                <% }) %>
+                            </div>
+                            <div class="accuracy">
+                                <% foundUser.forEach( (match) => { %>
+                                   <% if(element.status === "FINISHED" && element.id === match.matchId){ %>
+                                    <%= totalScore(element.score.fullTime.home, match.homeScore, element.score.fullTime.away, match.awayScore) %>
+                                   <% } %>
                                 <% }) %>
                             </div>
                    </div>
@@ -58,10 +68,6 @@
 
    
 </div>
-
-<form action="/logout" method="post" class="logout-form">
-    <button type="submit" class="log-out">Log Out</button>
-</form>
 
 <!-- <div class="friends-list"></div> -->
 
