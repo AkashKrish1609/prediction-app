@@ -27,31 +27,33 @@ button{
     cursor: pointer;
 }
 
-table{
-    margin-inline: 2rem;
-}
-
 .navbar{
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 10%;
-    min-height: 10vh;
+    min-height: 7rem;
     width: 100%;
     max-height: 10rem;
     background-color: var(--whitish);
     padding: 2rem;
 }
 
+.navbar>div{
+    width: 80%;
+    max-width: 50rem;
+    margin: 1rem;
+}
+
 .brand-name{
     text-transform: uppercase;
     font-weight: 700;
-    font-size: 2rem;
+    font-size: clamp(1rem, 6vw ,2rem);
     color: var(--dark-blue);
 }
 
 .description{
-    font-size: 1rem;
+    font-size: clamp(.5rem, 3.5vw, 1.2rem);
     color: rgb(100, 94, 94);
     font-weight: 300;
 }
@@ -74,12 +76,12 @@ table{
     width: 100%;
     height: 60%;
     min-height: 10rem;
-    font-size: 2rem; 
+    font-size: clamp(1rem, 5vw,2.5rem); 
     color: var(--dark-blue);
 }
 
 .left>p{
-    width: 90%;
+    width: 100%;
     max-width: 55rem;
     margin-inline: auto;
     margin-block: 7rem;
@@ -120,11 +122,15 @@ table{
 
 
 @media (max-width: 500px){
-
+    .f-large{
+    display: block;
+  }
 }
 
 .logout-form{
-
+    position: absolute;
+    right: 2rem;
+    top: 2rem;
 }
 
 .log-out{
@@ -138,14 +144,46 @@ table{
     cursor: pointer;
 }
 
+
+
+
+
 .results{
     height: 90%;
     width: 100%;
-    background-color: rgb(227, 238, 248);
+    background-color: var(--whitish);
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
+
+
+
+@media (max-width: 800px){
+    .results{
+        flex-direction: column;
+    }
+    table{
+        display: none;
+    }
+    .menubar{
+        width: 100%;
+        height: 5rem;
+        background-color: blue;
+        padding-inline: 3rem;
+    }
+}
+
+.menubar{
+display: none;
+}
+
+table{
+    margin-inline: 2rem;
+
+}
+
 
 .right-side{
     position: relative;
@@ -209,7 +247,7 @@ table{
 .sign-in-page>h1, .register>h1{
     text-transform: uppercase;
     color: var(--dark-blue);
-    font-size: 3rem;
+    font-size: clamp(2rem, 7vw, 3rem);
     font-weight: 700;
     margin-bottom: .5rem;
 }
