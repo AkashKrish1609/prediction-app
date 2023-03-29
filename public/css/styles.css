@@ -36,24 +36,24 @@ button{
     width: 100%;
     max-height: 10rem;
     background-color: var(--whitish);
-    padding: 2rem;
+    padding: min(5%,2rem);
 }
 
 .navbar>div{
     width: 80%;
     max-width: 50rem;
-    margin: 1rem;
+    margin: 0;
 }
 
 .brand-name{
     text-transform: uppercase;
     font-weight: 700;
-    font-size: clamp(1rem, 6vw ,2rem);
+    font-size: clamp(1rem, 7vw ,2rem);
     color: var(--dark-blue);
 }
 
 .description{
-    font-size: clamp(.5rem, 3.5vw, 1.2rem);
+    font-size: clamp(.5rem, 3vw, 1.2rem);
     color: rgb(100, 94, 94);
     font-weight: 300;
 }
@@ -89,18 +89,18 @@ button{
 
 .f-medium{
     display: block;
-    font-size: clamp(2.5rem, 10vw, 3.5rem);
+    font-size: clamp(2rem, 7vw, 3rem);
 }
 
 .f-large{
-    font-size: clamp(3.5rem, 10vw, 4.5rem);
+    font-size: clamp(3.8rem, 10vw, 4.5rem);
     text-transform: capitalize;
     color: var(--blue); 
 }
 
 .right{
     width: 100%;
-    height: 40%;
+    height: auto;
     min-height: 10rem;
 }
 
@@ -108,6 +108,13 @@ button{
     margin-bottom: 2rem;
     text-transform: uppercase;
     color: var(--dark-blue);
+}
+
+.form{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 }
 
 .sign-in,.sign-up{
@@ -129,7 +136,7 @@ button{
 
 .logout-form{
     position: absolute;
-    right: 2rem;
+    right: min(5%, 2rem);
     top: 2rem;
 }
 
@@ -150,12 +157,12 @@ button{
 
 .results{
     height: 90%;
+    min-height: 50rem;
     width: 100%;
     background-color: var(--whitish);
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
 }
 
 
@@ -173,6 +180,9 @@ button{
         background-color: blue;
         padding-inline: 3rem;
     }
+    .log-out{
+        padding: .5rem 1rem;
+    }
 }
 
 .menubar{
@@ -181,38 +191,36 @@ display: none;
 
 table{
     margin-inline: 2rem;
-
 }
 
 
 .right-side{
-    position: relative;
-    height: 80vh;
-    width: 35vw;
+    /* position: relative; */
+    height: auto;
+    min-height: 50rem;
+    width: 100%;
+    max-width: 25rem;
+    margin-block: 2rem;
 }
 
 .matchday-column{
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 80vh;
-    width: 35vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    width: 100%;
+    min-width: 35vw;
 }
 
 .match{
-    /* position: absolute;
-    top: 0;
-    left: 0; */
     display: flex;
     justify-content: center;
     align-items: center;
-    /* border: 1px solid red; */
+    width: 100%;
 }
 
 .heading-matchday{
-    /* position: absolute;
-    top: 0;
-    left: 0; */
     width: 100%;
     height: 100%;
     display: flex;
@@ -220,7 +228,11 @@ table{
     align-items: center;
     height: 10%;
     width: 100%;
-    /* border: 1px solid blue; */
+}
+
+.heading-matchday{
+    font-weight: 700;
+    font-size: clamp(.8rem, 4vw, 1.5rem);
 }
 
 .home, .away{
@@ -229,7 +241,19 @@ table{
     margin: 10px;
 }
 
+.left-toggle, .right-toggle{
+    padding: .5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--dark-blue);
+    color: var(--whitish);
+}
 
+@media (max-width: 800px){
+.left-toggle, .right-toggle{
+    margin-inline: 1rem;
+}
+}
 
 /* sign-in-page*//* register-page */
 
