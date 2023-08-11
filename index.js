@@ -52,12 +52,12 @@ app.get("/home", (req, res) => {
     
 
 
-const options1 = axios.get('https://api.football-data.org/v4/competitions/2021/standings', {
+const options1 = axios.get('https://api.football-data.org/v4/competitions/PL/standings', {
     headers: {
         'X-Auth-Token': apiKey
     }
   })
-const options2 = axios.get('https://api.football-data.org/v4/competitions/2021/matches', {
+const options2 = axios.get('https://api.football-data.org/v4/competitions/PL/matches', {
     headers: {
         'X-Auth-Token': apiKey
     }
